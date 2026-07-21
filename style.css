@@ -312,6 +312,35 @@ a { color: inherit; }
   text-decoration-thickness: 1px;
 }
 
+/* Les listes d'étapes. Le :not(.trous) protège la ligne des
+   pastilles de diamètres, qui est une liste elle aussi mais
+   qui se met en page autrement. */
+.section ol,
+.section ul:not(.trous) {
+  margin: var(--pas) 0 0;
+  padding-left: 1.3rem;
+}
+
+.section ol li,
+.section ul:not(.trous) li { margin-top: 0.5rem; }
+
+.section ol li::marker {
+  font-family: var(--mesure);
+  font-size: 0.85em;
+  color: var(--mousse);
+}
+
+/* Un avertissement à ne pas manquer */
+.attention {
+  margin-top: var(--pas);
+  padding: 1rem 1.2rem;
+  border-left: 3px solid var(--bois);
+  background: var(--fond-creux);
+}
+
+.attention p { margin: 0; }
+.attention p + p { margin-top: 0.6rem; }
+
 /* La petite ligne qui dit d'où viennent les chiffres */
 .source {
   font-size: 0.85rem;
