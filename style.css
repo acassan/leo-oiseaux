@@ -1,0 +1,417 @@
+/* ==========================================================
+   Les nichoirs — feuille de style
+   ----------------------------------------------------------
+   Léo : tu n'as pas besoin de toucher à ce fichier pour
+   écrire le contenu du site. Tout le texte se trouve dans
+   index.html. Ce fichier-ci ne décide que des couleurs,
+   des polices et de la mise en page.
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   1. Les réglages : couleurs, polices, espacements
+   ---------------------------------------------------------- */
+
+:root {
+  color-scheme: light dark;
+
+  /* Couleurs — thème clair.
+     Elles viennent du monde du nichoir : le gris-vert du
+     lichen sur une planche, le brun du pin, et le noir
+     qu'on voit au fond du trou d'envol. */
+  --fond:        #e8eae3;
+  --fond-creux:  #dfe2d8;
+  --encre:       #23281f;
+  --encre-doux:  #5a6153;
+  --mousse:      #43684a;
+  --bois:        #a9743b;
+  --ombre:       #14180f;
+  --trait:       #c7cbbd;
+
+  /* Polices — uniquement des polices déjà présentes sur
+     l'ordinateur : le site ne télécharge rien, il s'affiche
+     donc instantanément et fonctionne hors ligne. */
+  --titre:  Optima, Candara, "Gill Sans", "Gill Sans MT", "Trebuchet MS", sans-serif;
+  --texte:  Charter, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --mesure: ui-monospace, Menlo, Consolas, "DejaVu Sans Mono", monospace;
+
+  /* Rythme vertical */
+  --pas: 1.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fond:       #14180f;
+    --fond-creux: #1c2117;
+    --encre:      #e3e7da;
+    --encre-doux: #9aa291;
+    --mousse:     #8fb894;
+    --bois:       #c89258;
+    --ombre:      #0a0c07;
+    --trait:      #2e3527;
+  }
+}
+
+/* ----------------------------------------------------------
+   2. Remise à zéro et bases
+   ---------------------------------------------------------- */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--encre);
+  font-family: var(--texte);
+  font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.2rem);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--titre);
+  font-weight: 600;
+  line-height: 1.15;
+  text-wrap: balance;
+  margin: 0;
+}
+
+p { text-wrap: pretty; }
+
+a { color: inherit; }
+
+/* Le contour de sélection au clavier : visible partout,
+   pour qu'on puisse parcourir le site sans souris. */
+:focus-visible {
+  outline: 2px solid var(--mousse);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Lien d'évitement, caché tant qu'on ne l'a pas sélectionné */
+.saut {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 10;
+  padding: 0.6rem 1rem;
+  background: var(--mousse);
+  color: var(--fond);
+  font-family: var(--titre);
+  text-decoration: none;
+}
+.saut:focus { left: 0; }
+
+/* ----------------------------------------------------------
+   3. L'en-tête : le titre et le nichoir dessiné
+   ---------------------------------------------------------- */
+
+.hero {
+  display: grid;
+  gap: calc(var(--pas) * 2);
+  align-items: center;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 7vw, 6rem) 1.5rem clamp(2rem, 5vw, 4rem);
+}
+
+@media (min-width: 48rem) {
+  .hero {
+    grid-template-columns: 1fr auto;
+    gap: calc(var(--pas) * 3);
+  }
+}
+
+.surtitre {
+  margin: 0 0 0.75rem;
+  font-family: var(--mesure);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mousse);
+}
+
+.hero h1 {
+  font-size: clamp(2.6rem, 1.6rem + 4.5vw, 4.6rem);
+  letter-spacing: -0.02em;
+}
+
+.chapo {
+  max-width: 34ch;
+  margin: var(--pas) 0 0;
+  font-size: 1.15em;
+  color: var(--encre-doux);
+}
+
+/* --- Le nichoir, dessiné uniquement en CSS ---------------
+   Une planche taillée en pointe (le toit), le fil du bois
+   suggéré par des rayures, et le trou d'envol. Pas de
+   perchoir sous le trou : c'est volontaire, un perchoir
+   aide surtout les prédateurs à s'agripper. */
+
+.nichoir {
+  position: relative;
+  width: clamp(9rem, 26vw, 13rem);
+  aspect-ratio: 3 / 4.2;
+  justify-self: center;
+  clip-path: polygon(50% 0, 100% 24%, 100% 100%, 0 100%, 0 24%);
+  background:
+    repeating-linear-gradient(
+      92deg,
+      transparent 0 7px,
+      color-mix(in srgb, var(--ombre) 7%, transparent) 7px 8px
+    ),
+    linear-gradient(170deg, var(--bois), color-mix(in srgb, var(--bois) 78%, var(--ombre)));
+}
+
+.nichoir::after {
+  /* le trou d'envol */
+  content: "";
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  width: 34%;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: var(--ombre);
+  box-shadow: inset 0 3px 6px rgb(0 0 0 / 0.55);
+}
+
+/* ----------------------------------------------------------
+   4. La mise en page : sommaire à gauche, contenu à droite
+   ---------------------------------------------------------- */
+
+.page {
+  display: grid;
+  gap: calc(var(--pas) * 2);
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 1.5rem calc(var(--pas) * 4);
+}
+
+@media (min-width: 60rem) {
+  .page {
+    grid-template-columns: 13rem minmax(0, 40rem);
+    gap: calc(var(--pas) * 3);
+    justify-content: center;
+  }
+}
+
+/* --- Le sommaire ----------------------------------------- */
+
+.sommaire {
+  font-family: var(--titre);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+@media (min-width: 60rem) {
+  .sommaire {
+    position: sticky;
+    top: var(--pas);
+    align-self: start;
+    max-height: calc(100vh - var(--pas) * 2);
+    overflow-y: auto;
+  }
+}
+
+.sommaire h2 {
+  margin: 0 0 0.9rem;
+  font-family: var(--mesure);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--encre-doux);
+}
+
+.sommaire ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--trait);
+}
+
+.sommaire li { border-bottom: 1px solid var(--trait); }
+
+.sommaire a {
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  padding: 0.55rem 0;
+  color: var(--encre-doux);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+/* Le petit trou d'envol qui sert de puce : creux au repos,
+   il se remplit au survol. */
+.sommaire a::before {
+  content: "";
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border: 1px solid var(--mousse);
+  border-radius: 50%;
+  transition: background-color 0.15s ease;
+}
+
+.sommaire a:hover,
+.sommaire a:focus-visible { color: var(--encre); }
+
+.sommaire a:hover::before,
+.sommaire a:focus-visible::before { background: var(--mousse); }
+
+/* ----------------------------------------------------------
+   5. Les sections de contenu
+   ---------------------------------------------------------- */
+
+.section {
+  padding-block: calc(var(--pas) * 1.6);
+  border-top: 1px solid var(--trait);
+  /* décale l'ancre pour que le titre ne colle pas en haut */
+  scroll-margin-top: var(--pas);
+}
+
+.section:first-of-type { border-top: 0; padding-top: 0; }
+
+.section h2 {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  font-size: clamp(1.6rem, 1.3rem + 1.1vw, 2.15rem);
+  letter-spacing: -0.01em;
+}
+
+/* Le marqueur : le trou d'envol, en miniature. Chaque
+   section est une entrée — d'où le cercle plutôt qu'un
+   numéro, car ces sections ne se lisent pas dans l'ordre. */
+.section h2::before {
+  content: "";
+  flex: none;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--ombre);
+  box-shadow: 0 0 0 1px var(--mousse);
+}
+
+.section h3 {
+  margin-top: calc(var(--pas) * 1.2);
+  font-size: 1.15rem;
+  color: var(--mousse);
+}
+
+.section p { margin: var(--pas) 0 0; }
+
+/* ----------------------------------------------------------
+   6. Le bloc « à écrire »
+   ----------------------------------------------------------
+   Léo : c'est ce cadre en pointillés qui marque un endroit
+   où il reste du texte à écrire. Quand tu as écrit ta
+   section, supprime le bloc <div class="a-ecrire">…</div>
+   et mets tes paragraphes <p>…</p> à la place.
+   ---------------------------------------------------------- */
+
+.a-ecrire {
+  margin-top: var(--pas);
+  padding: 1.1rem 1.3rem;
+  border: 1px dashed color-mix(in srgb, var(--mousse) 55%, transparent);
+  border-radius: 4px;
+  background: var(--fond-creux);
+  color: var(--encre-doux);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.a-ecrire p { margin: 0; }
+.a-ecrire p + p { margin-top: 0.6rem; }
+
+.a-ecrire strong {
+  font-family: var(--mesure);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mousse);
+}
+
+/* ----------------------------------------------------------
+   7. Les diamètres de trou d'envol
+   ----------------------------------------------------------
+   Des pastilles dont la taille suit vraiment le diamètre
+   annoncé : on voit d'un coup d'œil qu'un étourneau demande
+   un trou bien plus large qu'une mésange bleue.
+   ---------------------------------------------------------- */
+
+.trous {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--pas) * 1.2);
+  align-items: flex-end;
+  margin: calc(var(--pas) * 1.2) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trous li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  text-align: center;
+}
+
+.trous .rond {
+  border-radius: 50%;
+  background: var(--ombre);
+  box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.5), 0 0 0 1px var(--trait);
+}
+
+.trous .mm {
+  font-family: var(--mesure);
+  font-size: 0.85rem;
+  color: var(--mousse);
+}
+
+.trous .espece {
+  max-width: 9ch;
+  font-family: var(--titre);
+  font-size: 0.85rem;
+  line-height: 1.25;
+  color: var(--encre-doux);
+}
+
+/* ----------------------------------------------------------
+   8. Pied de page
+   ---------------------------------------------------------- */
+
+.pied {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: calc(var(--pas) * 2) 1.5rem calc(var(--pas) * 3);
+  border-top: 1px solid var(--trait);
+  color: var(--encre-doux);
+  font-size: 0.9rem;
+}
+
+.pied p { margin: 0; }
+
+/* ----------------------------------------------------------
+   9. Confort : on coupe les animations si la personne
+      a demandé à son système de les réduire.
+   ---------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html { scroll-behavior: smooth; }

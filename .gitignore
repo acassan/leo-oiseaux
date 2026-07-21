@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+._*
+
+# Outils de test
+.playwright-mcp/
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp

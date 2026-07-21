@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Les nichoirs — guide</title>
+  <meta name="description" content="Un guide pour comprendre, construire et installer un nichoir à oiseaux.">
+
+  <!-- La petite icône de l'onglet : un trou d'envol, dessiné ici même. -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='5' fill='%23a9743b'/><circle cx='16' cy='16' r='7.5' fill='%2314180f'/></svg>">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ==========================================================
+     BONJOUR LÉO 👋
+
+     Tout le texte du site est dans ce fichier. Tu peux écrire
+     directement dedans, entre les balises.
+
+     Les trois choses à savoir :
+
+       1. Un paragraphe s'écrit :        <p>Ton texte ici.</p>
+       2. Un sous-titre s'écrit :        <h3>Ton sous-titre</h3>
+       3. Un mot important s'écrit :     <em>ton mot</em>
+
+     Partout où tu vois un encadré en pointillés
+     (<div class="a-ecrire"> … </div>), c'est un endroit qui
+     attend ton texte. Quand tu as écrit ta section, efface
+     tout l'encadré et mets tes <p>…</p> à la place.
+
+     Rien n'est cassable : si quelque chose s'affiche mal,
+     on peut toujours revenir en arrière.
+     ========================================================== -->
+
+<a class="saut" href="#contenu">Aller au contenu</a>
+
+<!-- ==========================================================
+     L'EN-TÊTE
+     Le nichoir à droite est dessiné par la feuille de style,
+     ce n'est pas une image : il n'y a donc rien à télécharger.
+     ========================================================== -->
+
+<header class="hero">
+  <div>
+    <p class="surtitre">Guide</p>
+
+    <!-- Léo : tu peux changer le titre du site ici. -->
+    <h1>Les nichoirs</h1>
+
+    <!-- … et la phrase d'introduction juste en dessous. -->
+    <p class="chapo">
+      Une phrase d'accroche à écrire : de quoi parle ce site,
+      et à qui s'adresse-t-il&nbsp;?
+    </p>
+  </div>
+
+  <div class="nichoir" role="img" aria-label="Dessin d'un nichoir en bois vu de face, avec son trou d'envol"></div>
+</header>
+
+
+<div class="page">
+
+  <!-- ========================================================
+       LE SOMMAIRE
+       Chaque lien mène à une section plus bas dans la page.
+       Si tu ajoutes une section, ajoute aussi son lien ici.
+       ======================================================== -->
+
+  <nav class="sommaire" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <ol>
+      <li><a href="#pourquoi">Pourquoi installer un nichoir</a></li>
+      <li><a href="#types">Les types de nichoirs</a></li>
+      <li><a href="#dimensions">Les dimensions et le trou d'envol</a></li>
+      <li><a href="#ou">Où l'installer</a></li>
+      <li><a href="#quand">Quand l'installer</a></li>
+      <li><a href="#construire">Le construire soi-même</a></li>
+      <li><a href="#entretien">L'entretien</a></li>
+      <li><a href="#erreurs">Les erreurs à éviter</a></li>
+    </ol>
+  </nav>
+
+
+  <!-- ========================================================
+       LE CONTENU
+       Une section par sujet. Tu peux en ajouter, en enlever,
+       ou changer leur ordre : recopie simplement le modèle
+       d'une section existante.
+       ======================================================== -->
+
+  <main id="contenu">
+
+    <section class="section" id="pourquoi">
+      <h2>Pourquoi installer un nichoir</h2>
+      <div class="a-ecrire">
+        <p><strong>À écrire</strong></p>
+        <p>
+          Explique ici à quoi sert un nichoir. Par exemple&nbsp;: les
+          oiseaux trouvent de moins en moins d'arbres creux pour faire
+          leur nid, et un nichoir leur en offre un de remplacement.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="types">
+      <h2>Les types de nichoirs</h2>
+      <div class="a-ecrire">
+        <p><strong>À écrire</strong></p>
+        <p>
+          Présente les différentes formes de nichoirs&nbsp;: le nichoir
+          fermé avec un trou rond, le nichoir semi-ouvert, les modèles
+          plats… et dis quel oiseau préfère lequel.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="dimensions">
+      <h2>Les dimensions et le trou d'envol</h2>
+
+      <p>
+        Le diamètre du trou est ce qui décide quelle espèce peut entrer,
+        et laquelle reste dehors. Quelques millimètres suffisent à tout
+        changer&nbsp;:
+      </p>
+
+      <!-- Ces pastilles sont dessinées à une taille proportionnelle
+           au diamètre indiqué : plus le trou est large, plus le rond
+           est gros. Pour en ajouter une, recopie un bloc <li> et
+           change la largeur, la hauteur et le texte. -->
+      <ul class="trous">
+        <li>
+          <span class="rond" style="width: 42px; height: 42px;"></span>
+          <span class="mm">28 mm</span>
+          <span class="espece">Mésange bleue</span>
+        </li>
+        <li>
+          <span class="rond" style="width: 48px; height: 48px;"></span>
+          <span class="mm">32 mm</span>
+          <span class="espece">Mésange charbonnière</span>
+        </li>
+        <li>
+          <span class="rond" style="width: 51px; height: 51px;"></span>
+          <span class="mm">34 mm</span>
+          <span class="espece">Moineau domestique</span>
+        </li>
+        <li>
+          <span class="rond" style="width: 68px; height: 68px;"></span>
+          <span class="mm">45 mm</span>
+          <span class="espece">Étourneau sansonnet</span>
+        </li>
+      </ul>
+
+      <div class="a-ecrire">
+        <p><strong>À vérifier et compléter</strong></p>
+        <p>
+          Ces quatre diamètres sont des valeurs courantes, mises là pour
+          te montrer à quoi ressemble le tableau une fois rempli. Vérifie-les
+          dans un livre ou sur le site de la LPO, corrige si besoin, et
+          ajoute les espèces que tu veux présenter.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="ou">
+      <h2>Où l'installer</h2>
+      <div class="a-ecrire">
+        <p><strong>À écrire</strong></p>
+        <p>
+          À quelle hauteur&nbsp;? Dans quelle direction doit regarder le
+          trou&nbsp;? Faut-il de l'ombre, du soleil, un endroit calme&nbsp;?
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="quand">
+      <h2>Quand l'installer</h2>
+      <div class="a-ecrire">
+        <p><strong>À écrire</strong></p>
+        <p>
+          À quelle saison poser le nichoir pour que les oiseaux aient le
+          temps de le repérer avant de faire leur nid&nbsp;?
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="construire">
+      <h2>Le construire soi-même</h2>
+      <div class="a-ecrire">
+        <p><strong>À écrire</strong></p>
+        <p>
+          Quel bois choisir, quelle épaisseur, quels outils&nbsp;? Tu peux
+          aussi expliquer les étapes dans l'ordre, et dire ce qu'il ne faut
+          surtout pas utiliser.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="entretien">
+      <h2>L'entretien</h2>
+      <div class="a-ecrire">
+        <p><strong>À écrire</strong></p>
+        <p>
+          Un nichoir se nettoie une fois par an. Explique quand le faire,
+          et comment s'y prendre.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="erreurs">
+      <h2>Les erreurs à éviter</h2>
+      <div class="a-ecrire">
+        <p><strong>À écrire</strong></p>
+        <p>
+          Les pièges les plus fréquents. Par exemple&nbsp;: pourquoi il vaut
+          mieux ne pas mettre de perchoir sous le trou&nbsp;— il aide surtout
+          les prédateurs à s'agripper.
+        </p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+
+<!-- ==========================================================
+     LE PIED DE PAGE
+     ========================================================== -->
+
+<footer class="pied">
+  <p>Un site écrit par Léo.</p>
+</footer>
+
+</body>
+</html>
