@@ -29,11 +29,15 @@
      Toutes les parties sont écrites — bravo ! Si tu veux en
      ajouter une nouvelle plus tard, recopie une section
      entière (de <section> à </section>), change son titre et
-     son id="...", puis ajoute son lien dans le sommaire.
+     son id="...", puis ajoute son lien dans la barre du haut.
 
-     Deux mises en forme sont prêtes si tu en as besoin :
+     Trois mises en forme sont prêtes si tu en as besoin :
        <div class="attention"> … </div>  un encadré important
        <p class="source"> … </p>         d'où vient l'info
+       <figure class="figure"> … </figure>  une photo
+
+     Une photo avec class="figure large" s'affiche en grand,
+     sur toute la largeur de l'écran.
 
      Rien n'est cassable : si quelque chose s'affiche mal,
      on peut toujours revenir en arrière.
@@ -42,12 +46,33 @@
 <a class="saut" href="#contenu">Aller au contenu</a>
 
 <!-- ==========================================================
-     L'EN-TÊTE
-     Le nichoir à droite est dessiné par la feuille de style,
-     ce n'est pas une image : il n'y a donc rien à télécharger.
+     LA BARRE DE NAVIGATION
+     Elle reste collée en haut de l'écran quand on descend la
+     page. Si tu ajoutes une partie, ajoute aussi son lien ici.
      ========================================================== -->
 
-<header class="hero">
+<div class="barre">
+  <div class="barre__interieur">
+    <a class="marque" href="#haut">Les nichoirs</a>
+    <nav class="chips" aria-label="Les parties du site">
+      <a href="#pourquoi">Pourquoi</a>
+      <a href="#types">Les types</a>
+      <a href="#dimensions">Dimensions</a>
+      <a href="#ou">Où</a>
+      <a href="#quand">Quand</a>
+      <a href="#choisir">Acheter</a>
+      <a href="#entretien">Entretien</a>
+      <a href="#erreurs">Erreurs</a>
+    </nav>
+  </div>
+</div>
+
+
+<!-- ==========================================================
+     L'EN-TÊTE
+     ========================================================== -->
+
+<header class="hero" id="haut">
   <div>
     <p class="surtitre">Guide</p>
 
@@ -61,41 +86,26 @@
     </p>
   </div>
 
-  <div class="nichoir" role="img" aria-label="Dessin d'un nichoir en bois vu de face, avec son trou d'envol"></div>
+  <figure>
+    <img src="assets/mesange-nichoir.jpg" width="1063" height="1200" fetchpriority="high"
+         alt="Une mésange bleue agrippée au bord du trou d'envol d'un nichoir en bois, un insecte dans le bec.">
+    <figcaption>
+      Une mésange bleue apporte à manger à ses petits. Regarde bien&nbsp;:
+      elle se tient <em>directement au bord du trou</em>. C'est la preuve
+      qu'un perchoir ne sert à rien.
+    </figcaption>
+  </figure>
 </header>
 
 
-<div class="page">
+<!-- ==========================================================
+     LE CONTENU
+     Une section par sujet. Tu peux en ajouter, en enlever,
+     ou changer leur ordre : recopie simplement le modèle
+     d'une section existante.
+     ========================================================== -->
 
-  <!-- ========================================================
-       LE SOMMAIRE
-       Chaque lien mène à une section plus bas dans la page.
-       Si tu ajoutes une section, ajoute aussi son lien ici.
-       ======================================================== -->
-
-  <nav class="sommaire" aria-label="Sommaire">
-    <h2>Sommaire</h2>
-    <ol>
-      <li><a href="#pourquoi">Pourquoi installer un nichoir</a></li>
-      <li><a href="#types">Les types de nichoirs</a></li>
-      <li><a href="#dimensions">Les dimensions et le trou d'envol</a></li>
-      <li><a href="#ou">Où l'installer</a></li>
-      <li><a href="#quand">Quand l'installer</a></li>
-      <li><a href="#choisir">Bien le choisir en magasin</a></li>
-      <li><a href="#entretien">L'entretien</a></li>
-      <li><a href="#erreurs">Les erreurs à éviter</a></li>
-    </ol>
-  </nav>
-
-
-  <!-- ========================================================
-       LE CONTENU
-       Une section par sujet. Tu peux en ajouter, en enlever,
-       ou changer leur ordre : recopie simplement le modèle
-       d'une section existante.
-       ======================================================== -->
-
-  <main id="contenu">
+<main id="contenu">
 
     <section class="section" id="pourquoi">
       <h2>Pourquoi installer un nichoir</h2>
@@ -120,6 +130,15 @@
         dormir, c'est l'endroit où la femelle pond ses œufs et où les
         oisillons grandissent jusqu'à savoir voler.
       </p>
+
+      <figure class="figure large">
+        <img src="assets/mesange-branche.jpg" width="1400" height="936" loading="lazy"
+             alt="Une mésange bleue posée sur une branche en train de bourgeonner, sur fond de ciel bleu.">
+        <figcaption>
+          Une mésange bleue au printemps. C'est elle que j'aimerais voir
+          venir dans mon nichoir.
+        </figcaption>
+      </figure>
     </section>
 
     <section class="section" id="types">
@@ -221,6 +240,17 @@
         feraient chasser.
       </p>
 
+      <figure class="figure">
+        <img src="assets/mesange-bleue.jpg" width="1400" height="933" loading="lazy"
+             alt="Portrait d'une mésange bleue : calotte bleue, joues blanches barrées de noir, ventre jaune.">
+        <figcaption>
+          Comment la reconnaître&nbsp;: une petite calotte bleue sur la tête,
+          des joues blanches traversées d'un trait noir, et le ventre jaune.
+          La mésange charbonnière, elle, a la tête noire et une cravate noire
+          sur le ventre.
+        </figcaption>
+      </figure>
+
       <h3>Les mesures de mon nichoir</h3>
 
       <p>
@@ -313,6 +343,16 @@
         reste vide une année entière avant d'être adopté. Ce n'est pas grave,
         et ça ne veut pas dire qu'on s'y est mal pris.
       </p>
+
+      <figure class="figure">
+        <img src="assets/jeune-mesange.jpg" width="1200" height="799" loading="lazy"
+             alt="Un jeune oiseau au plumage ébouriffé, posé sur une branche, le bec encore bordé de jaune.">
+        <figcaption>
+          Voilà ce qu'on attend&nbsp;: une jeune mésange qui vient de quitter
+          le nichoir. Elle est encore ébouriffée et le bord de son bec est
+          jaune — c'est ce qui distingue un oisillon d'un adulte.
+        </figcaption>
+      </figure>
 
       <p>
         En attendant, il servira peut-être quand même. En hiver, certains
@@ -458,6 +498,17 @@
         prédateurs, qui s'en servent pour s'agripper.
       </p>
 
+      <figure class="figure">
+        <img src="assets/nichoir-arbre.jpg" width="719" height="1000" loading="lazy"
+             alt="Un nichoir en bois fixé sur un tronc de bouleau, avec un petit bâton qui dépasse sous le trou d'envol.">
+        <figcaption>
+          Un vrai nichoir, accroché sur un bouleau — et un bon exemple de ce
+          qu'il ne faut pas prendre&nbsp;: on voit nettement le petit bâton qui
+          dépasse sous le trou. Compare avec la photo tout en haut de la page,
+          où la mésange se tient très bien sans lui.
+        </figcaption>
+      </figure>
+
       <h3>Le nettoyer avec des produits</h3>
       <p>
         La javel et le savon laissent des restes dangereux pour les oisillons.
@@ -473,14 +524,46 @@
     </section>
 
   </main>
-</div>
 
 
 <!-- ==========================================================
      LE PIED DE PAGE
+     Les photos viennent de Wikimedia Commons. Chacune est
+     libre d'utilisation, à condition de citer son auteur —
+     c'est ce que fait la liste ci-dessous. Si tu ajoutes une
+     photo, ajoute aussi sa ligne ici.
      ========================================================== -->
 
 <footer class="pied">
+  <h2>Les photos</h2>
+  <ul class="credits">
+    <li>
+      Mésange au nichoir — David Merrett,
+      <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>,
+      <a href="https://commons.wikimedia.org/wiki/File:Adult_blue_tit_(Cyanistes_caeruleus)_at_wooden_nest_box_no._2.jpg">Wikimedia Commons</a>
+    </li>
+    <li>
+      Mésange bleue sur une tige — Alexis Lours,
+      <a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a>,
+      <a href="https://commons.wikimedia.org/wiki/File:Eurasian_Blue_Tit_2025_04_07.jpg">Wikimedia Commons</a>
+    </li>
+    <li>
+      Mésange bleue sur une branche — Martin Kunz,
+      <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>,
+      <a href="https://commons.wikimedia.org/wiki/File:Cyanistes_caeruleus_sitting_on_branch.jpg">Wikimedia Commons</a>
+    </li>
+    <li>
+      Jeune mésange charbonnière — W. Pfahler,
+      <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>,
+      <a href="https://commons.wikimedia.org/wiki/File:Junge_Kohlmeise_(Parus_major)_kurz_nach_dem_Verlassen_des_Nistkastens.jpg">Wikimedia Commons</a>
+    </li>
+    <li>
+      Nichoir sur un bouleau — Yamola48,
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>,
+      <a href="https://commons.wikimedia.org/wiki/File:Wooden_Birdhouse_on_Birch_Tree.jpg">Wikimedia Commons</a>
+    </li>
+  </ul>
+
   <p>Un site écrit par Léo.</p>
 </footer>
 

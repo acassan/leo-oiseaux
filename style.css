@@ -14,8 +14,7 @@
 :root {
   color-scheme: light dark;
 
-  /* Couleurs — thème clair.
-     Elles viennent du monde du nichoir : le gris-vert du
+  /* Couleurs tirées du monde du nichoir : le gris-vert du
      lichen sur une planche, le brun du pin, et le noir
      qu'on voit au fond du trou d'envol. */
   --fond:        #e8eae3;
@@ -27,15 +26,14 @@
   --ombre:       #14180f;
   --trait:       #c7cbbd;
 
-  /* Polices — uniquement des polices déjà présentes sur
-     l'ordinateur : le site ne télécharge rien, il s'affiche
-     donc instantanément et fonctionne hors ligne. */
+  /* Polices déjà présentes sur l'ordinateur : le site ne
+     télécharge rien, il s'affiche donc instantanément. */
   --titre:  Optima, Candara, "Gill Sans", "Gill Sans MT", "Trebuchet MS", sans-serif;
   --texte:  Charter, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
   --mesure: ui-monospace, Menlo, Consolas, "DejaVu Sans Mono", monospace;
 
-  /* Rythme vertical */
   --pas: 1.5rem;
+  --barre-h: 3.4rem;   /* hauteur de la barre de navigation */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -78,23 +76,20 @@ h1, h2, h3 {
 }
 
 p { text-wrap: pretty; }
-
 a { color: inherit; }
+img { max-width: 100%; height: auto; }
 
-/* Le contour de sélection au clavier : visible partout,
-   pour qu'on puisse parcourir le site sans souris. */
 :focus-visible {
   outline: 2px solid var(--mousse);
   outline-offset: 3px;
   border-radius: 2px;
 }
 
-/* Lien d'évitement, caché tant qu'on ne l'a pas sélectionné */
 .saut {
   position: absolute;
   left: -9999px;
   top: 0;
-  z-index: 10;
+  z-index: 40;
   padding: 0.6rem 1rem;
   background: var(--mousse);
   color: var(--fond);
@@ -104,203 +99,191 @@ a { color: inherit; }
 .saut:focus { left: 0; }
 
 /* ----------------------------------------------------------
-   3. L'en-tête : le titre et le nichoir dessiné
+   3. La barre de navigation, collée en haut
+   ----------------------------------------------------------
+   Elle remplace l'ancien sommaire de gauche : le texte peut
+   ainsi occuper toute la largeur. Sur un écran étroit, les
+   liens défilent horizontalement du doigt.
+   ---------------------------------------------------------- */
+
+.barre {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: color-mix(in srgb, var(--fond) 86%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--trait);
+}
+
+.barre__interieur {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  min-height: var(--barre-h);
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.marque {
+  display: flex;
+  gap: 0.5rem;
+  flex: none;
+  align-items: center;
+  font-family: var(--titre);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* le trou d'envol, en miniature, comme logo */
+.marque::before {
+  content: "";
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--ombre);
+  box-shadow: 0 0 0 1.5px var(--mousse);
+}
+
+.chips {
+  display: flex;
+  gap: 0.15rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.chips::-webkit-scrollbar { display: none; }
+
+.chips a {
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  color: var(--encre-doux);
+  font-family: var(--titre);
+  font-size: 0.9rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.chips a:hover,
+.chips a:focus-visible {
+  background: var(--fond-creux);
+  color: var(--encre);
+}
+
+@media (max-width: 34rem) {
+  .marque { font-size: 0; gap: 0; }   /* on ne garde que la pastille */
+}
+
+/* ----------------------------------------------------------
+   4. L'en-tête
    ---------------------------------------------------------- */
 
 .hero {
   display: grid;
-  gap: calc(var(--pas) * 2);
+  gap: clamp(1.75rem, 4vw, 3rem);
   align-items: center;
-  max-width: 64rem;
+  max-width: 78rem;
   margin: 0 auto;
-  padding: clamp(2.5rem, 7vw, 6rem) 1.5rem clamp(2rem, 5vw, 4rem);
+  padding: clamp(2.25rem, 6vw, 4.5rem) 1.25rem clamp(2rem, 4vw, 3.5rem);
 }
 
-@media (min-width: 48rem) {
-  .hero {
-    grid-template-columns: 1fr auto;
-    gap: calc(var(--pas) * 3);
-  }
+@media (min-width: 52rem) {
+  .hero { grid-template-columns: 1.05fr 0.95fr; }
 }
 
 .surtitre {
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.8rem;
   font-family: var(--mesure);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--mousse);
 }
 
 .hero h1 {
-  font-size: clamp(2.6rem, 1.6rem + 4.5vw, 4.6rem);
+  font-size: clamp(2.6rem, 1.5rem + 5vw, 5rem);
   letter-spacing: -0.02em;
 }
 
 .chapo {
-  max-width: 34ch;
+  max-width: 36ch;
   margin: var(--pas) 0 0;
   font-size: 1.15em;
   color: var(--encre-doux);
 }
 
-/* --- Le nichoir, dessiné uniquement en CSS ---------------
-   Une planche taillée en pointe (le toit), le fil du bois
-   suggéré par des rayures, et le trou d'envol. Pas de
-   perchoir sous le trou : c'est volontaire, un perchoir
-   aide surtout les prédateurs à s'agripper. */
+.hero figure { margin: 0; }
 
-.nichoir {
-  position: relative;
-  width: clamp(9rem, 26vw, 13rem);
-  aspect-ratio: 3 / 4.2;
-  justify-self: center;
-  clip-path: polygon(50% 0, 100% 24%, 100% 100%, 0 100%, 0 24%);
-  background:
-    repeating-linear-gradient(
-      92deg,
-      transparent 0 7px,
-      color-mix(in srgb, var(--ombre) 7%, transparent) 7px 8px
-    ),
-    linear-gradient(170deg, var(--bois), color-mix(in srgb, var(--bois) 78%, var(--ombre)));
+.hero img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 66vh;      /* pour que la photo ne remplisse pas tout l'écran */
+  margin-inline: auto;
+  border-radius: 4px;
+  box-shadow: 0 18px 40px -22px rgb(0 0 0 / 0.55);
 }
 
-.nichoir::after {
-  /* le trou d'envol */
-  content: "";
-  position: absolute;
-  top: 38%;
-  left: 50%;
-  width: 34%;
-  aspect-ratio: 1;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background: var(--ombre);
-  box-shadow: inset 0 3px 6px rgb(0 0 0 / 0.55);
-}
-
-/* ----------------------------------------------------------
-   4. La mise en page : sommaire à gauche, contenu à droite
-   ---------------------------------------------------------- */
-
-.page {
-  display: grid;
-  gap: calc(var(--pas) * 2);
-  max-width: 64rem;
-  margin: 0 auto;
-  padding: 0 1.5rem calc(var(--pas) * 4);
-}
-
-@media (min-width: 60rem) {
-  .page {
-    grid-template-columns: 13rem minmax(0, 40rem);
-    gap: calc(var(--pas) * 3);
-    justify-content: center;
-  }
-}
-
-/* --- Le sommaire ----------------------------------------- */
-
-.sommaire {
-  font-family: var(--titre);
-  font-size: 0.95rem;
-  line-height: 1.4;
-}
-
-@media (min-width: 60rem) {
-  .sommaire {
-    position: sticky;
-    top: var(--pas);
-    align-self: start;
-    max-height: calc(100vh - var(--pas) * 2);
-    overflow-y: auto;
-  }
-}
-
-.sommaire h2 {
-  margin: 0 0 0.9rem;
-  font-family: var(--mesure);
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+.hero figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
   color: var(--encre-doux);
 }
 
-.sommaire ol {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid var(--trait);
-}
-
-.sommaire li { border-bottom: 1px solid var(--trait); }
-
-.sommaire a {
-  display: flex;
-  gap: 0.6rem;
-  align-items: baseline;
-  padding: 0.55rem 0;
-  color: var(--encre-doux);
-  text-decoration: none;
-  transition: color 0.15s ease;
-}
-
-/* Le petit trou d'envol qui sert de puce : creux au repos,
-   il se remplit au survol. */
-.sommaire a::before {
-  content: "";
-  flex: none;
-  width: 0.5rem;
-  height: 0.5rem;
-  border: 1px solid var(--mousse);
-  border-radius: 50%;
-  transition: background-color 0.15s ease;
-}
-
-.sommaire a:hover,
-.sommaire a:focus-visible { color: var(--encre); }
-
-.sommaire a:hover::before,
-.sommaire a:focus-visible::before { background: var(--mousse); }
-
 /* ----------------------------------------------------------
-   5. Les sections de contenu
+   5. Les sections
+   ----------------------------------------------------------
+   Chaque section est une grille : le texte occupe une colonne
+   centrale confortable à lire, mais une image peut déborder
+   jusqu'aux bords en lui donnant la classe « large ».
    ---------------------------------------------------------- */
 
 .section {
-  padding-block: calc(var(--pas) * 1.6);
+  display: grid;
+  grid-template-columns:
+    [bord-debut] minmax(1.25rem, 1fr)
+    [texte-debut] minmax(0, 50rem) [texte-fin]
+    minmax(1.25rem, 1fr) [bord-fin];
+  padding-block: clamp(2.5rem, 5vw, 4.5rem);
   border-top: 1px solid var(--trait);
-  /* décale l'ancre pour que le titre ne colle pas en haut */
-  scroll-margin-top: var(--pas);
+  scroll-margin-top: var(--barre-h);
 }
 
-.section:first-of-type { border-top: 0; padding-top: 0; }
+/* Les deux lignes ci-dessous doivent nommer explicitement la
+   ligne de début ET celle de fin : le raccourci « grid-column:
+   texte » ne fonctionnerait qu'avec des lignes nommées
+   texte-start / texte-end, et créerait sinon une colonne
+   fantôme dans laquelle tout le contenu se décalerait. */
+.section > * { grid-column: texte-debut / texte-fin; }
+.section > .large { grid-column: bord-debut / bord-fin; }
 
 .section h2 {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.8rem;
   align-items: center;
-  font-size: clamp(1.6rem, 1.3rem + 1.1vw, 2.15rem);
+  font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.5rem);
   letter-spacing: -0.01em;
 }
 
-/* Le marqueur : le trou d'envol, en miniature. Chaque
-   section est une entrée — d'où le cercle plutôt qu'un
-   numéro, car ces sections ne se lisent pas dans l'ordre. */
+/* Le marqueur : le trou d'envol en miniature. Un cercle
+   plutôt qu'un numéro, car ces sections ne se lisent pas
+   forcément dans l'ordre. */
 .section h2::before {
   content: "";
   flex: none;
-  width: 0.7rem;
-  height: 0.7rem;
+  width: 0.75rem;
+  height: 0.75rem;
   border-radius: 50%;
   background: var(--ombre);
-  box-shadow: 0 0 0 1px var(--mousse);
+  box-shadow: 0 0 0 1.5px var(--mousse);
 }
 
 .section h3 {
-  margin-top: calc(var(--pas) * 1.2);
-  font-size: 1.15rem;
+  margin-top: calc(var(--pas) * 1.3);
+  font-size: 1.18rem;
   color: var(--mousse);
 }
 
@@ -312,9 +295,6 @@ a { color: inherit; }
   text-decoration-thickness: 1px;
 }
 
-/* Les listes d'étapes. Le :not(.trous) protège la ligne des
-   pastilles de diamètres, qui est une liste elle aussi mais
-   qui se met en page autrement. */
 .section ol,
 .section ul:not(.trous) {
   margin: var(--pas) 0 0;
@@ -330,61 +310,39 @@ a { color: inherit; }
   color: var(--mousse);
 }
 
-/* Un avertissement à ne pas manquer */
-.attention {
-  margin-top: var(--pas);
-  padding: 1rem 1.2rem;
-  border-left: 3px solid var(--bois);
-  background: var(--fond-creux);
-}
-
-.attention p { margin: 0; }
-.attention p + p { margin-top: 0.6rem; }
-
-/* La petite ligne qui dit d'où viennent les chiffres */
-.source {
-  font-size: 0.85rem;
-  color: var(--encre-doux);
-}
-
 /* ----------------------------------------------------------
-   6. Le bloc « à écrire »
-   ----------------------------------------------------------
-   Léo : c'est ce cadre en pointillés qui marque un endroit
-   où il reste du texte à écrire. Quand tu as écrit ta
-   section, supprime le bloc <div class="a-ecrire">…</div>
-   et mets tes paragraphes <p>…</p> à la place.
+   6. Les photos dans le texte
    ---------------------------------------------------------- */
 
-.a-ecrire {
-  margin-top: var(--pas);
-  padding: 1.1rem 1.3rem;
-  border: 1px dashed color-mix(in srgb, var(--mousse) 55%, transparent);
+.figure {
+  margin: calc(var(--pas) * 1.6) 0 0;
+}
+
+.figure img {
+  display: block;
+  width: 100%;
   border-radius: 4px;
-  background: var(--fond-creux);
+}
+
+/* Une photo « large » déborde du texte : on lui impose une
+   proportion de bandeau pour qu'elle ne mange pas l'écran. */
+.figure.large img {
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.figure figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
   color: var(--encre-doux);
-  font-size: 0.95rem;
-  line-height: 1.6;
 }
 
-.a-ecrire p { margin: 0; }
-.a-ecrire p + p { margin-top: 0.6rem; }
-
-.a-ecrire strong {
-  font-family: var(--mesure);
-  font-size: 0.75rem;
-  font-weight: 400;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--mousse);
-}
+.figure.large figcaption { padding: 0 1.25rem; }
 
 /* ----------------------------------------------------------
    7. Les diamètres de trou d'envol
-   ----------------------------------------------------------
-   Des pastilles dont la taille suit vraiment le diamètre
-   annoncé : on voit d'un coup d'œil qu'un étourneau demande
-   un trou bien plus large qu'une mésange bleue.
    ---------------------------------------------------------- */
 
 .trous {
@@ -412,13 +370,7 @@ a { color: inherit; }
   box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.5), 0 0 0 1px var(--trait);
 }
 
-.trous .mm {
-  font-family: var(--mesure);
-  font-size: 0.85rem;
-  color: var(--mousse);
-}
-
-/* Le nichoir que Léo a choisi : un anneau vert autour du trou */
+/* Le nichoir choisi : un anneau vert autour du trou */
 .trous li.choisi .rond {
   box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.5), 0 0 0 3px var(--mousse);
 }
@@ -438,6 +390,12 @@ a { color: inherit; }
   color: var(--mousse);
 }
 
+.trous .mm {
+  font-family: var(--mesure);
+  font-size: 0.85rem;
+  color: var(--mousse);
+}
+
 .trous .espece {
   max-width: 9ch;
   font-family: var(--titre);
@@ -447,23 +405,91 @@ a { color: inherit; }
 }
 
 /* ----------------------------------------------------------
-   8. Pied de page
+   8. Encadrés
+   ---------------------------------------------------------- */
+
+/* Un avertissement à ne pas manquer */
+.attention {
+  margin-top: var(--pas);
+  padding: 1rem 1.2rem;
+  border-left: 3px solid var(--bois);
+  background: var(--fond-creux);
+}
+
+.attention p { margin: 0; }
+.attention p + p { margin-top: 0.6rem; }
+
+/* La petite ligne qui dit d'où viennent les chiffres */
+.source {
+  font-size: 0.85rem;
+  color: var(--encre-doux);
+}
+
+/* Léo : ce cadre en pointillés marque un endroit qui attend
+   du texte. Il n'y en a plus, mais la mise en forme reste
+   disponible si tu ajoutes une partie. */
+.a-ecrire {
+  margin-top: var(--pas);
+  padding: 1.1rem 1.3rem;
+  border: 1px dashed color-mix(in srgb, var(--mousse) 55%, transparent);
+  border-radius: 4px;
+  background: var(--fond-creux);
+  color: var(--encre-doux);
+  font-size: 0.95rem;
+}
+
+.a-ecrire p { margin: 0; }
+.a-ecrire p + p { margin-top: 0.6rem; }
+
+.a-ecrire strong {
+  font-family: var(--mesure);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mousse);
+}
+
+/* ----------------------------------------------------------
+   9. Pied de page et crédits des photos
    ---------------------------------------------------------- */
 
 .pied {
-  max-width: 64rem;
+  max-width: 78rem;
   margin: 0 auto;
-  padding: calc(var(--pas) * 2) 1.5rem calc(var(--pas) * 3);
+  padding: calc(var(--pas) * 2) 1.25rem calc(var(--pas) * 3);
   border-top: 1px solid var(--trait);
   color: var(--encre-doux);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
 }
 
-.pied p { margin: 0; }
+.pied h2 {
+  margin: 0 0 0.9rem;
+  font-family: var(--mesure);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.pied a { color: var(--mousse); text-underline-offset: 3px; }
+
+.credits {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0 0 var(--pas);
+  padding: 0;
+  list-style: none;
+  line-height: 1.5;
+}
+
+@media (min-width: 46rem) {
+  .credits { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.45rem 2rem; }
+}
 
 /* ----------------------------------------------------------
-   9. Confort : on coupe les animations si la personne
-      a demandé à son système de les réduire.
+   10. Confort : on coupe les animations si la personne
+       a demandé à son système de les réduire.
    ---------------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
