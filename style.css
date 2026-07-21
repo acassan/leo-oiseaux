@@ -306,6 +306,18 @@ a { color: inherit; }
 
 .section p { margin: var(--pas) 0 0; }
 
+.section a {
+  color: var(--mousse);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+/* La petite ligne qui dit d'où viennent les chiffres */
+.source {
+  font-size: 0.85rem;
+  color: var(--encre-doux);
+}
+
 /* ----------------------------------------------------------
    6. Le bloc « à écrire »
    ----------------------------------------------------------
@@ -373,6 +385,19 @@ a { color: inherit; }
 .trous .mm {
   font-family: var(--mesure);
   font-size: 0.85rem;
+  color: var(--mousse);
+}
+
+/* Le nichoir que Léo a choisi : un anneau vert autour du trou */
+.trous li.choisi .rond {
+  box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.5), 0 0 0 3px var(--mousse);
+}
+
+.trous .choix {
+  font-family: var(--mesure);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--mousse);
 }
 
