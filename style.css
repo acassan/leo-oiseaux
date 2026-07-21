@@ -190,7 +190,7 @@ img { max-width: 100%; height: auto; }
 }
 
 @media (min-width: 52rem) {
-  .hero { grid-template-columns: 1.05fr 0.95fr; }
+  .hero { grid-template-columns: 1.4fr 0.6fr; }
 }
 
 .surtitre {
@@ -220,7 +220,7 @@ img { max-width: 100%; height: auto; }
   display: block;
   width: auto;
   max-width: 100%;
-  max-height: 66vh;      /* pour que la photo ne remplisse pas tout l'écran */
+  max-height: 42vh;      /* pour que la photo ne prenne pas toute la hauteur */
   margin-inline: auto;
   border-radius: 4px;
   box-shadow: 0 18px 40px -22px rgb(0 0 0 / 0.55);
